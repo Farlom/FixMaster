@@ -30,6 +30,7 @@ private:
 public:
     ~MasterList();
     void instertMaster(Master*);
+    int getSal(string);
     bool display(); //вывод списка
     bool isEmpty();
     bool isExisting(string);
@@ -118,33 +119,20 @@ public:
     bool display();
 };
 
-class ClientInputScreen
-{
-private:
-    ClientList* ptrClientList;
-    string clientName, autoName;
-
-public:
-    ClientInputScreen(ClientList* ptrCL): ptrClientList(ptrCL)
-    {
-
-    }
-
-    void setClient();
-
-};
-
 class SparePart //з\ч
 {
 private:
-    string name;
-    int price;
+    string name, ownerName;
+    int price, month;
 
 public:
-    SparePart();
+    SparePart(string n, string on, int p, int m);
     ~SparePart();
     string getName();
+    string getOwnerName();
     int getPrice();
+    int getMonth();
+//    void setClient(string);
 };
 
 class SparePartList
@@ -156,6 +144,7 @@ private:
 public:
     ~SparePartList();
     void insertSparePart(SparePart*);
+    void display(string on, int m);
     void display();
 };
 
@@ -163,8 +152,9 @@ class SparePartInputScreen
 {
 private:
     SparePartList* ptrSparePartList;
-    string sparePartName;
-    int price;
+    string sparePartName, ownerName;
+    int price, month;
+    SparePart* ptrSparePart;
 
 public:
     SparePartInputScreen(SparePartList* ptrSPL): ptrSparePartList(ptrSPL)
@@ -173,19 +163,23 @@ public:
     }
 
     void setSparePart(int, string);
+//    SparePart* getPtr();
+//    void setClient(SparePart*, string);
 };
 
 class Service //услуга
 {
 private:
-    string name;
-    int price;
+    string name, ownerName;
+    int price, month;
 
 public:
-    Service(string n, int p);
+    Service(string n, string on, int p, int m);
     ~Service();
+    string getOwnerName();
     string getName();
     int getPrice();
+    int getMonth();
 };
 
 class ServiceList
@@ -198,14 +192,15 @@ public:
     ~ServiceList();
     void insertService(Service*);
     void display();
+    void display(string on, int m);
 };
 
 class ServiceInputScreen
 {
 private:
     ServiceList* ptrServiceList;
-    string serviceName;
-    int price;
+    string serviceName, ownerName;
+    int price, month;
 
 public:
     ServiceInputScreen(ServiceList* ptrSL): ptrServiceList(ptrSL)
