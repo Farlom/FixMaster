@@ -1,7 +1,7 @@
 #include <iostream>
 #include <conio.h> //getch();
 #include "fixmaster.h"
-
+//
 //методы класса Master
 Master::Master(string n, int s): name(n), salary(s)
 {
