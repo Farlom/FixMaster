@@ -174,6 +174,7 @@ void SalaryRecord::insertSalary(string masterName, int month)
     setPtrsSR.push_back(ptrRow);
 }
 
+//
 void SalaryRecord::display()
 {
     wcout << L"Зарплатная ведомость\n";
