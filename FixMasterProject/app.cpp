@@ -1,10 +1,14 @@
 #include "fixmaster.h"
+#include <clocale>
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    setlocale(LC_ALL, "Russian");
+    UserInterface UI;
+
+    UI.start();
 
 
      return 0;
