@@ -5,6 +5,7 @@ using namespace std;
 UserInterface::UserInterface()
 {
     ptrMasterList = new MasterList;
+    ptrSparePartList = new SparePartList;
     ptrSalaryRecord = new SalaryRecord;
     ptrClientList = new ClientList;
 }
@@ -12,6 +13,7 @@ UserInterface::UserInterface()
 UserInterface::~UserInterface()
 {
     delete ptrMasterList;
+    delete ptrSparePartList;
     delete ptrSalaryRecord;
     delete ptrClientList;
 }
@@ -29,9 +31,9 @@ void UserInterface::start()
             {
                 char ch2;
                 system("cls");
-                wcout << L"????? ????? ??????\n";
+                wcout << L"Vvod dannih\n";
                 wcout << L"1 - ???????? ?????? ???????\t2 - ????????? ????? ????? ?? ?????? ???????\n";
-                wcout << L"3 - ??????\n";
+                wcout << L"3 - ??????\t4 - vvod z.ch.\n";
                 wcout << L"0 - ?????\n????: ";
                 cin >> ch2;
 
@@ -56,6 +58,10 @@ void UserInterface::start()
                     ptrClientInputScreen = new ClientInputScreen(ptrClientList);
                     ptrClientInputScreen->setClient();
                     break;
+                case '4':
+                    ptrSparePartInputScreen = new SparePartInputScreen(ptrSparePartList);
+                    ptrSparePartInputScreen->setSparePart(NULL, "123");
+                    break;
                 }
 
 
@@ -67,7 +73,7 @@ void UserInterface::start()
                 system("cls");
                 wcout << L"????? ?????? ??????\n";
                 wcout << L"1 - ??????? ?????? ????????\t2 - ??????? ?????????? ?????????\n";
-                wcout << L"3 - 5 - ??????\n";
+                wcout << L"3 - 4 - vivod z.ch. 5 - ??????\n";
                 wcout << L"0 - ?????\n????: ";
                 cin >> ch2;
 
@@ -87,6 +93,11 @@ void UserInterface::start()
                 case '3':
                     system("cls");
                     ptrClientList->display();
+                    break;
+
+                case '4':
+                    system("cls");
+                    ptrSparePartList->display();
                     break;
                 }
             }

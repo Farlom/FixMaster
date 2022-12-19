@@ -24,6 +24,8 @@ private:
     SalaryInputScreen* ptrSalaryInputScreen;
     ClientList* ptrClientList;
     ClientInputScreen* ptrClientInputScreen;
+    SparePartInputScreen* ptrSparePartInputScreen;
+    SparePartList* ptrSparePartList;
 
     char ch;
 

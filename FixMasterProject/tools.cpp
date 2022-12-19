@@ -2,61 +2,123 @@
 
 using namespace std;
 
-SparePart::SparePart(string n, string on, int p, int m)
+SparePart::SparePart(string n, string on, int p, int m): name(n), ownerName(on), price(p), month(m)
 {
-//todo
+
 }
 
 SparePart::~SparePart()
 {
-//todo
+
 }
 
 string SparePart::getName()
 {
-//todo
+    return name;
 }
 
 string SparePart::getOwnerName()
 {
-//todo
+    return ownerName;
 }
 
 int SparePart::getPrice()
 {
-//todo
+    return price;
 }
 
 int SparePart::getMonth()
 {
-//todo
+    return month;
 }
+
+//void SparePart::setClient(string cn)
+//{
+//   ownerName = cn;
+//}
 
 //методы класса SparePartList
 SparePartList::~SparePartList()
 {
-    //todo
+    while(!setPtrsSpareParts.empty())
+    {
+        iter = setPtrsSpareParts.begin();
+        delete *iter;
+        setPtrsSpareParts.erase(iter);
+    }
 }
 
 void SparePartList::insertSparePart(SparePart* ptrSP)
 {
-    //todo
+    setPtrsSpareParts.push_back(ptrSP);
 }
 
 void SparePartList::display(string on, int m)
 {
-    //todo
+    wcout << L"Список з/ч:\n";
+    if(setPtrsSpareParts.empty())
+    {
+        wcout << L"Список пуст.\nДля продолжения нажмите любую клавишу...";
+        getch();
+        system("cls");
+        return;
+    }
+    else
+    {
+        iter = setPtrsSpareParts.begin();
+        wcout << L"Name\tPrice\tFor\n";
+
+        while(iter != setPtrsSpareParts.end())
+        {
+            if ((*iter)->getOwnerName() == on)
+            {
+                if ((*iter)->getMonth() == m)
+                {
+                    cout << (*iter)->getName() << "\t" << (*iter)->getPrice() << "\t" << (*iter)->getOwnerName() << "123\n";
+                }
+
+            }
+            *iter++;
+        }
+        return;
+    }
 }
 
 void SparePartList::display()
 {
-    //todo
+    wcout << L"Список з/ч:\n";
+    if(setPtrsSpareParts.empty())
+    {
+        wcout << L"Список пуст.\nДля продолжения нажмите любую клавишу...";
+        getch();
+        system("cls");
+        return;
+    }
+    else
+    {
+        iter = setPtrsSpareParts.begin();
+        wcout << L"Name\tPrice\tFor\n";
+
+        while(iter != setPtrsSpareParts.end())
+        {
+            cout << (*iter)->getName() << "\t" << (*iter)->getPrice() << "\t" << (*iter)->getOwnerName() << "\n";
+            *iter++;
+        }
+        return;
+    }
 }
 
 //методы класса SparePartInputScreen
 void SparePartInputScreen::setSparePart(int m, string n)
 {
-    //todo
+    wcout << L"Введите наименование з.ч.: ";
+    cin >> sparePartName;
+    wcout << L"Введите стоимость з.ч.: ";
+    cin >> price;
+    ownerName = n;
+    month = m;
+    SparePart* ptr = new SparePart(sparePartName, n, price, m);
+    ptrSparePartList->insertSparePart(ptr);
 }
 
 Service::Service(string n, string on, int p, int m)
