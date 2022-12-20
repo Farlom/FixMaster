@@ -234,14 +234,4 @@ void ServiceInputScreen::setService(int m, string n)
     month = m;
     Service* ptr = new Service(serviceName, n, price, m);
     ptrServiceList->insertService(ptr);
-//    cout<<ptr->getOwnerName();
-
-//    wcout << L"Введите ID: ";
-//    cin >> ID;
-//    wcout << L"\nВведите название: ";
-//    cin >> serviceName;
-//    wcout << L"\nВведите стоимость: ";
-//    cin >> price;
-//    Service* ptrService = new Service(ID, serviceName, price);
-//    ptrServiceList->insertService(ptrService);
 }
