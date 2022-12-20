@@ -8,6 +8,7 @@ UserInterface::UserInterface()
     ptrSparePartList = new SparePartList;
     ptrSalaryRecord = new SalaryRecord;
     ptrClientList = new ClientList;
+    ptrServiceList = new ServiceList;
 }
 
 UserInterface::~UserInterface()
@@ -16,6 +17,7 @@ UserInterface::~UserInterface()
     delete ptrSparePartList;
     delete ptrSalaryRecord;
     delete ptrClientList;
+    delete ptrServiceList;
 }
 
 void UserInterface::start()
@@ -33,7 +35,7 @@ void UserInterface::start()
                 system("cls");
                 wcout << L"РЕЖИМ ВВОДА ДАННЫХ\n";
                 wcout << L"1 - добавить нового мастера\t2 - ????????? ????? ????? ?? ?????? ???????\n";
-                wcout << L"3 - ??????\t4 - vvod z.ch.\n";
+                wcout << L"3 - ??????\t4 - vvod z.ch.\n 5-Сервис\n";
                 wcout << L"0 - ?????\n????: ";
                 cin >> ch2;
 
@@ -62,6 +64,10 @@ void UserInterface::start()
                     ptrSparePartInputScreen = new SparePartInputScreen(ptrSparePartList);
                     ptrSparePartInputScreen->setSparePart(NULL, "123");
                     break;
+                case '5':
+                    ptrServiceInputScreen = new ServiceInputScreen(ptrServiceList);
+                    ptrServiceInputScreen->setService(NULL, "123");
+                    break;
                 }
 
 
@@ -73,7 +79,7 @@ void UserInterface::start()
                 system("cls");
                 wcout << L"РЕЖИМ ВЫВОДА ДАННЫХ\n";
                 wcout << L"1 - ??????? ?????? ????????\t2 - ??????? ?????????? ?????????\n";
-                wcout << L"3 - 4 - vivod z.ch. 5 - ??????\n";
+                wcout << L"3 - 4 - vivod z.ch. 5-Вывод услуг\n 6 - ??????\n";
                 wcout << L"0 - ?????\n????: ";
                 cin >> ch2;
 
@@ -98,6 +104,10 @@ void UserInterface::start()
                 case '4':
                     system("cls");
                     ptrSparePartList->display();
+                    break;
+                case '5':
+                    system("cls");
+                    ptrServiceList->display();
                     break;
                 }
             }

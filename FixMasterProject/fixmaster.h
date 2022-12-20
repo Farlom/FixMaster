@@ -26,7 +26,8 @@ private:
     ClientInputScreen* ptrClientInputScreen;
     SparePartInputScreen* ptrSparePartInputScreen;
     SparePartList* ptrSparePartList;
-
+ServiceList* ptrServiceList;
+ServiceInputScreen* ptrServiceInputScreen;
     char ch;
 
 public:
