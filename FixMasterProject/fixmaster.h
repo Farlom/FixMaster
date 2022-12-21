@@ -26,8 +26,12 @@ private:
     ClientInputScreen* ptrClientInputScreen;
     SparePartInputScreen* ptrSparePartInputScreen;
     SparePartList* ptrSparePartList;
-ServiceList* ptrServiceList;
-ServiceInputScreen* ptrServiceInputScreen;
+    FixOrderList* ptrFixOrderList;
+    FixOrderInputScreen* ptrFixOrderInputScreen;
+    ShipOrderList* ptrShipOrderList;
+    ShipOrderInputScreen* ptrShipOrderInputScreen;
+    ServiceList* ptrServiceList;
+    ServiceInputScreen* ptrServiceInputScreen;
     char ch;
 
 public:

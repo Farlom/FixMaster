@@ -9,6 +9,8 @@ UserInterface::UserInterface()
     ptrSalaryRecord = new SalaryRecord;
     ptrClientList = new ClientList;
     ptrServiceList = new ServiceList;
+    ptrFixOrderList = new FixOrderList;
+    ptrShipOrderList = new ShipOrderList;
 }
 
 UserInterface::~UserInterface()
@@ -18,6 +20,8 @@ UserInterface::~UserInterface()
     delete ptrSalaryRecord;
     delete ptrClientList;
     delete ptrServiceList;
+    delete ptrFixOrderList;
+    delete ptrShipOrderList;
 }
 
 void UserInterface::start()
@@ -34,8 +38,9 @@ void UserInterface::start()
                 char ch2;
                 system("cls");
                 wcout << L"РЕЖИМ ВВОДА ДАННЫХ\n";
-                wcout << L"1 - добавить нового мастера\t2 - Составить заказ-наряд на услугу ремонта\n";
+                wcout << L"1 - добавить нового мастера\t2 - добавить зп мастеру\n";
                 wcout << L"3 - Добавить клиента\t4 - Ввод з.ч\t 5-Добавить услугу\n";
+                wcout << L"6 - Добавить заказ наряд на услугу ремонта\t7 - добавить заказ наряд на поставки\n";
                 wcout << L"0 - Выход\nВвод: ";
                 cin >> ch2;
 
@@ -68,6 +73,14 @@ void UserInterface::start()
                     ptrServiceInputScreen = new ServiceInputScreen(ptrServiceList);
                     ptrServiceInputScreen->setService(NULL, "123");
                     break;
+                case '6':
+                    ptrFixOrderInputScreen = new FixOrderInputScreen(ptrFixOrderList, ptrClientList, ptrMasterList, ptrSalaryRecord, ptrSparePartList, ptrServiceList);
+                    ptrFixOrderInputScreen->setFixOrder();
+                    break;
+                case '7':
+                    ptrShipOrderInputScreen = new ShipOrderInputScreen(ptrShipOrderList, ptrSparePartList);
+                    ptrShipOrderInputScreen->setShipOrder();
+                    break;
                 }
 
 
@@ -80,6 +93,7 @@ void UserInterface::start()
                 wcout << L"РЕЖИМ ВЫВОДА ДАННЫХ\n";
                 wcout << L"1 - Вывести список мастеров\t2 - Вывести зарплатную ведомость\n";
                 wcout << L"3 - Вывести список клиентов\t4 - Вывод списка з.ч\t 5-Вывод услуг\n";
+                wcout << L"6 - зну\t7 - знп\n";
                 wcout << L"0 - Выход\nВвод: ";
                 cin >> ch2;
 
@@ -108,6 +122,14 @@ void UserInterface::start()
                 case '5':
                     system("cls");
                     ptrServiceList->display();
+                    break;
+                case '6':
+                    system("cls");
+                    ptrFixOrderList->display();
+                    break;
+                case '7':
+                    system("cls");
+                    ptrShipOrderList->display();
                     break;
                 }
             }
