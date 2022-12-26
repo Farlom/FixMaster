@@ -2,9 +2,11 @@
 
 using namespace std;
 
-SalaryRow::SalaryRow(string n): masterName(n)
+//методы класса SalaryRow
+SalaryRow::SalaryRow(string n, int s): masterName(n), masterSalary(s)
 {
-    fill(&salary[0], &salary[12], 0); //çàïîëíÿåì ìàññèâ íóëÿìè
+    fill(&salary[0], &salary[12], 0); //заполняем массив нулями
+
 
 }
 
@@ -32,9 +34,17 @@ int SalaryRow::getSumOfSalary()
     }
     return tmp;
 }
+ void SalaryRow::setMasterSalary(int sum)
+ {
+     masterSalary = sum;
+ }
 
+ int SalaryRow::getMasterSalary()
+ {
+     return masterSalary;
+ }
 
-//ìåòîäû êëàññà SalaryRecord
+//методы класса SalaryRecord
 SalaryRecord::~SalaryRecord()
 {
     while(!setPtrsSR.empty())
@@ -45,11 +55,12 @@ SalaryRecord::~SalaryRecord()
     }
 }
 
-void SalaryRecord::insertSalary(string masterName, int month)
+void SalaryRecord::insertSalary(string masterName, int masterSalary, int month)
 {
     /*
-     * èíêðåìåíòèðóåò ñ÷åò÷èê ðàáîò ó ìàñòåðà masterName â ìåñÿöå month
+     * инкрементирует счетчик работ у мастера masterName в месяце month
      */
+
     iter = setPtrsSR.begin();
     while(iter != setPtrsSR.end())
     {
@@ -61,12 +72,11 @@ void SalaryRecord::insertSalary(string masterName, int month)
         else
             iter++;
     }
-    SalaryRow* ptrRow = new SalaryRow(masterName);
+    SalaryRow* ptrRow = new SalaryRow(masterName, masterSalary);
     ptrRow->setSalary(month);
     setPtrsSR.push_back(ptrRow);
 }
 
-//
 void SalaryRecord::display()
 {
     wcout << L"Зарплатная ведомость\n";
@@ -84,22 +94,21 @@ void SalaryRecord::display()
         while(iter != setPtrsSR.end())
         {
 
-            cout<<(*iter)->getMasterName();
+
+            cout<<(*iter)->getMasterName().substr(0,6);
 
             for(int i = 0; i < 12; i++)
             {
                 cout<<"\t"<<(*iter)->getSalaryFor(i);
             }
-
-            cout<<"\t"<<(*iter)->getSumOfSalary()<<"\n";
-
+            int total = (*iter)->getSumOfSalary();
+            int sal = (*iter)->getMasterSalary();
+            cout << "\t" << total << "\t" << total*sal << "\n";
             iter++;
         }
-    }
-    //(*iter)->getMasterName();
+        wcout << L"Итог в  у.е.: " << getSumOfSalaries() << "\n";
 
-          //TODO
-    //âûâîäèò òàáëèöó "Çàðïëàòíàÿ âåäîìîñòü" (âîçìîæíî, åùå ïðèäåòñÿ óìíîæàòü íà çï ìàñòåðà)
+    }
 }
 
 int SalaryRecord::getSumOfSalaries()
@@ -108,17 +117,26 @@ int SalaryRecord::getSumOfSalaries()
     iter = setPtrsSR.begin();
     while(iter != setPtrsSR.end())
     {
-        sum = sum + (*iter)->getSumOfSalary();
+        sum = sum + ((*iter)->getSumOfSalary() * (*iter)->getMasterSalary());
         iter++;
     }
 
     return sum;
-    //TODO
-    //âûâîäèò ñóììó âñåõ îïëàò ìàñòåðàì
 }
 
+void SalaryRecord::setMasterSalary(string name, int sum)
+{
+    iter = setPtrsSR.begin();
+    while(iter != setPtrsSR.end())
+    {
+        if ((*iter)->getMasterName() == name)
+        {
+            (*iter)->setMasterSalary(sum);
+        }
+    }
+}
 
-//ìåòîäû êëàññà SalaryInputScreen
+//методы класса SalaryInputScreen
 void SalaryInputScreen::setSalary()
 {
     //wcout<< L"SalaryInputScreen.setSalary() \n";
@@ -143,14 +161,11 @@ void SalaryInputScreen::setSalary()
         {
             wcout << L"\nВведите месяц, в котором выполнялись работы: ";
             cin >> month;
-            ptrSalaryRecord->insertSalary(masterName, month);
+            int sum = ptrMasterList->getSal(masterName);
+            ptrSalaryRecord->insertSalary(masterName, sum, month);
+
+            ptrSalaryRecord->setMasterSalary(masterName, sum);
         }
 
     }
-
-    //TODO
-    /* ïîëó÷èòü èìÿ ìàñòåðà
-     * åñëè èìÿ íàéäåíî (è òàêîé ìàñòåð ñóùåñòâóåò)
-     * èíêðåìåíòèðóåì
-     */
 }

@@ -11,13 +11,18 @@ using namespace std;
 class SalaryRow {
 private:
     string masterName;
+    int masterSalary;
     int salary[12];
+    MasterList* ptrMasterList;
+
 public:
-    SalaryRow(string);
+    SalaryRow(string, int);
     void setSalary(int);
+    void setMasterSalary(int);
     int getSumOfSalary();
     string getMasterName();
     int getSalaryFor(int);
+    int getMasterSalary();
 };
 
 class SalaryRecord
@@ -28,7 +33,8 @@ private:
 
 public:
     ~SalaryRecord();
-    void insertSalary(string, int);
+    void insertSalary(string, int, int);
+    void setMasterSalary(string, int);
     void display();
     int getSumOfSalaries();
 

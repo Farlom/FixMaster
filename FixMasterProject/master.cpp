@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Master::Master(string n, int s): name(n), salary(s)
+Master::Master(int id, string n, int s): ID(id), name(n), salary(s)
 {
     //rdy
 }
@@ -22,10 +22,15 @@ int Master::getSalary()
     return salary;
 }
 
-//Ð¼ÐµÑÐ¾Ð´Ñ ÐºÐ»Ð°ÑÑÐ° MasterList
+int Master::getID()
+{
+    return ID;
+}
+
+//методы класса MasterList
 MasterList::~MasterList()
 {
-    //ÑÐ´Ð°Ð»ÑÐµÐ¼ ÑÐºÐ°Ð·Ð°ÑÐµÐ»Ð¸ Ð¸Ð· ÐºÐ¾Ð½ÑÐµÐ¹Ð½ÐµÑÐ°
+    //удаляем указатели из контейнера
     while (!setPtrsMasters.empty())
     {
         iter = setPtrsMasters.begin();
@@ -36,7 +41,7 @@ MasterList::~MasterList()
 
 void MasterList::instertMaster(Master* ptrM)
 {
-    //Ð²ÑÑÐ°Ð²Ð¸ÑÑ Ð² ÐºÐ¾Ð½ÐµÑ list`Ð°
+    //вставить в конец list`а
     setPtrsMasters.push_back(ptrM);
 }
 
@@ -53,8 +58,22 @@ int MasterList::getSal(string mName)
         }
         iter++;
     }
-    //Ð½Ðµ Ð½Ð°ÑÐµÐ» = -1
+    //не нашел = -1
     return -1;
+}
+
+string MasterList::getNameByID(int id)
+{
+    iter = setPtrsMasters.begin();
+    while (iter != setPtrsMasters.end())
+    {
+        if((*iter)->getID() == id)
+        {
+            return (*iter)->getName();
+        }
+        *iter++;
+    }
+    return "Not found.";
 }
 
 bool MasterList::display()
@@ -69,13 +88,14 @@ bool MasterList::display()
     }
     else
     {
-        wcout << L"Имя\tОклад\n";
+        wcout << L"ID\tИмя\tОклад\n";
         iter = setPtrsMasters.begin();
         while (iter != setPtrsMasters.end())
         {
-            cout << (*iter)->getName() << "\t" << (*iter)->getSalary() << "\n";
+            cout << (*iter)->getID() << "\t" << (*iter)->getName() << "\t" << (*iter)->getSalary() << "\n";
             *iter++;
         }
+        getch();
         return true;
     }
 }
@@ -85,25 +105,35 @@ bool MasterList::isEmpty()
     return setPtrsMasters.empty();
 }
 
-bool MasterList::isExisting(string name)
+bool MasterList::isExisting(int id)
 {
     iter = setPtrsMasters.begin();
     while(iter != setPtrsMasters.end())
     {
-        if((*iter)->getName() == name)
+        if((*iter)->getID() == id)
             return true;
         else *iter++;
     }
     return false;
 }
 
-//Ð¼ÐµÑÐ¾Ð´Ñ ÐºÐ»Ð°ÑÑÐ° MasterInputScreen
+int MasterList::length()
+{
+    return setPtrsMasters.size();
+}
+
+//cвойства и методы класса MasterInputScreen
+
+int MasterInputScreen::ID = 1;
+
 void MasterInputScreen::setMaster()
 {
     wcout << L"Введите имя мастера: ";
     cin >> mName;
     wcout << L"Введите оплату: ";
     cin >> mSalary;
-    Master* ptrMaster = new Master(mName, mSalary);
+
+    Master* ptrMaster = new Master(ID, mName, mSalary);
     ptrMasterList->instertMaster(ptrMaster);
+    ID++;
 }
