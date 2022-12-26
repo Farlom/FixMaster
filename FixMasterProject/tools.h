@@ -10,17 +10,22 @@ using namespace std;
 class SparePart //з\ч
 {
 private:
+    int ID;
     string name, ownerName;
-    int price, month;
+    int price, day, month;
+
 
 public:
-    SparePart(string n, string on, int p, int m);
+    SparePart(int id, string n, string on, int p, int dd, int mm);
     ~SparePart();
     string getName();
     string getOwnerName();
+//    void setID(int);
+    int getID();
     int getPrice();
+    int getDay();
     int getMonth();
-//    void setClient(string);
+    void setClient(string);
 };
 
 class SparePartList
@@ -32,16 +37,32 @@ private:
 public:
     ~SparePartList();
     void insertSparePart(SparePart*);
+    void setID(SparePart*, int);
     void display(string on, int m);
-    void display();
+    void display(); //вывод всего списка
+    void display(int mm, int dd); //вывод списка запчастей, заказанных до dd, mm, ownerName = 0;
+    void displayByID(int id);
+    SparePart* getPtrByID(int id);
+    bool isEmpty();
+    bool isExisting(int id);
+    bool isFree(int id);
+    void updateSparePart(int id, string cn);
+    int length();
+
+    string getName(int id);
+    int getPrice(int id);
+
+    int getTotalPrice(bool free);
 };
 
 class SparePartInputScreen
 {
 private:
     SparePartList* ptrSparePartList;
+    int ID;
     string sparePartName, ownerName;
-    int price, month;
+    int day, month;
+    int price;
     SparePart* ptrSparePart;
 
 public:
@@ -50,7 +71,9 @@ public:
 
     }
 
-    void setSparePart(int, string);
+    void setSparePart(int, int, string);
+    string getSparePartName();
+    int getSparePartPrice();
 //    SparePart* getPtr();
 //    void setClient(SparePart*, string);
 };
@@ -59,13 +82,14 @@ class Service //услуга
 {
 private:
     string name, ownerName;
-    int price, month;
+    int price, day, month;
 
 public:
-    Service(string n, string on, int p, int m);
+    Service(string n, string on, int p, int d, int m);
     ~Service();
     string getOwnerName();
     string getName();
+    int getDay();
     int getPrice();
     int getMonth();
 };
@@ -81,6 +105,7 @@ public:
     void insertService(Service*);
     void display();
     void display(string on, int m);
+    int getTotalServices();
 };
 
 class ServiceInputScreen
@@ -88,7 +113,7 @@ class ServiceInputScreen
 private:
     ServiceList* ptrServiceList;
     string serviceName, ownerName;
-    int price, month;
+    int price, day, month;
 
 public:
     ServiceInputScreen(ServiceList* ptrSL): ptrServiceList(ptrSL)
@@ -96,7 +121,9 @@ public:
 
     }
 
-    void setService(int, string);
+    void setService(int, int, string);
+    string getName();
+    int getPrice();
 };
 
 #endif // TOOLS
