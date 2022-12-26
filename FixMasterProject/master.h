@@ -9,12 +9,14 @@ using namespace std;
 
 class Master {
 private:
+    int ID;
     string name;
     int salary;
 
 public:
-    Master(string n, int s);
+    Master(int id, string n, int s);
     ~Master();
+    int getID();
     string getName();
     int getSalary();
 };
@@ -27,14 +29,18 @@ public:
     ~MasterList();
     void instertMaster(Master*);
     int getSal(string);
+    string getNameByID(int);
+//    void setID(Master*, )
     bool display(); //вывод списка
     bool isEmpty();
-    bool isExisting(string);
+    bool isExisting(int);
+    int length();
 };
 
 class MasterInputScreen {
 private:
     MasterList* ptrMasterList;
+    static int ID;
     string mName;
     int mSalary;
 public:

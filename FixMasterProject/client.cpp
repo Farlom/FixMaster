@@ -4,7 +4,7 @@ using namespace std;
 
 Client::Client(string n, string an): name(n), autoName(an)
 {
-//return "123";
+
 }
 
 Client::~Client()
