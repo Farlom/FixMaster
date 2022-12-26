@@ -3,24 +3,28 @@
 
 #include <iostream>
 #include <list>
-#include <tools.h>
+#include "tools.h"
 
 using namespace std;
 
 class ShipOrder
 {
 private:
+    int ID;
     int day, month/*, count*/;
     string sparePartName;
     int sparePartPrice;
 
 public:
-    ShipOrder(int dd, int mm, string spn, int spp);
+    ShipOrder(int id, int dd, int mm, string spn, int spp);
     ~ShipOrder();
+    int getID();
     int getDay();
     int getMonth();
     string getSparePartName();
     int getSparePartPrice();
+    string getServiceName();
+    int getServicePrice();
 };
 
 class ShipOrderList
@@ -34,6 +38,7 @@ public:
     void insert(ShipOrder*);
     int getTotalPrice();
     void display();
+    void displayByID(int id);
 };
 
 class ShipOrderInputScreen

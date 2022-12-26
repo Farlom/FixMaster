@@ -1,4 +1,4 @@
-#include <salary.h>
+#include "salary.h"
 
 using namespace std;
 

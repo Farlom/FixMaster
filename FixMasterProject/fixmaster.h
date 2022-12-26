@@ -5,13 +5,13 @@
 #include <list>
 #include <vector>
 
-#include <master.h>
-#include <salary.h>
-#include <client.h>
-#include <tools.h>
-#include <fixorder.h>
-#include <shiporder.h>
-#include <annual.h>
+#include "master.h"
+#include "salary.h"
+#include "client.h"
+#include "tools.h"
+#include "fixorder.h"
+#include "shiporder.h"
+#include "annual.h"
 
 using namespace std;
 
@@ -24,14 +24,15 @@ private:
     SalaryInputScreen* ptrSalaryInputScreen;
     ClientList* ptrClientList;
     ClientInputScreen* ptrClientInputScreen;
-    SparePartInputScreen* ptrSparePartInputScreen;
-    SparePartList* ptrSparePartList;
+    SparePartList* ptrSparePartList; //todo
+    SparePartInputScreen* ptrSparePartInputScreen; //todo
+    ServiceList* ptrServiceList;
+    ServiceInputScreen* ptrServiceInputScreen;
     FixOrderList* ptrFixOrderList;
     FixOrderInputScreen* ptrFixOrderInputScreen;
     ShipOrderList* ptrShipOrderList;
     ShipOrderInputScreen* ptrShipOrderInputScreen;
-    ServiceList* ptrServiceList;
-    ServiceInputScreen* ptrServiceInputScreen;
+    AnnualReport* ptrAnnualReport;
     char ch;
 
 public:
@@ -39,6 +40,5 @@ public:
     ~UserInterface();
     void start();
 };
-
 #endif // FIXMASTER
 

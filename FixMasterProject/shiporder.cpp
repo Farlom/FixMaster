@@ -1,9 +1,9 @@
-#include <shiporder.h>
+#include "shiporder.h"
 
 using namespace std;
 
-ShipOrder::ShipOrder(int dd, int mm, string spn, int spp):
-    day(dd), month(mm), sparePartName(spn), sparePartPrice(spp)
+ShipOrder::ShipOrder(int id, int dd, int mm, string spn, int spp):
+    ID(id), day(dd), month(mm), sparePartName(spn), sparePartPrice(spp)
 {
 
 }
@@ -85,7 +85,67 @@ void ShipOrderList::display()
             *iter++;
         }
     }
+    getch();
     return;
+}
+
+void ShipOrderList::displayByID(int id)
+{
+//    int price;
+//    bool tmp = true;
+//    wcout << L"Заказ-наряд на услуги: \n";
+//    iter = setPtrsShipOrder.begin();
+//    while(iter != setPtrsShipOrder.end())
+//    {
+//        if((*iter)->getID() == id)
+//        {
+//            if(tmp)
+//            {
+//                wcout << L"Date\tAuto\tClient\tMaster\n";
+//                cout << (*iter)->getDay() << "." << (*iter)->getMonth() << "\t"
+//                      << (*iter)->getAutoName() << "\t" << (*iter)->getClientName() << "\t"
+//                      << (*iter)->getMasterName() << "\n";
+//                price = (*iter)->getTotalPrice();
+
+//                wcout << L"ЗАПЧАСТИ И РАСХОДНИКИ\n";
+//                wcout << L"Наименование\tЦена\n";
+//                tmp = false;
+//            }
+
+
+//            cout << (*iter)->getSparePartName() << "\t\t" << (*iter)->getSparePartPrice() << "\n";
+
+
+
+//        }
+//        *iter++;
+
+//    }
+//    tmp = true;
+//    iter = setPtrsShipOrder.begin();
+//    while(iter != setPtrsShipOrder.end())
+//    {
+//        if((*iter)->getID() == id)
+//        {
+//            if(tmp)
+//            {
+//                wcout << L"ВЫПОЛНЕННЫЕ РАБОТЫ\n";
+//                wcout << L"Наименование\tЦена\n";
+//                tmp = false;
+//            }
+
+//            cout << (*iter)->getServiceName() << "\t\t" << (*iter)->getServicePrice() << "\n";
+
+
+
+//        }
+//         *iter++;
+
+
+//    }
+//    wcout << L"Общая стоимость: " << price << "\n";
+//    getch();
+
 }
 
 ShipOrderInputScreen::ShipOrderInputScreen(ShipOrderList* ptrSOL, SparePartList* ptrSPL):
@@ -106,7 +166,11 @@ void ShipOrderInputScreen::setShipOrder()
     while(tmp)
     {
         char choice;
-        ptrSparePartInputScreen->setSparePart(month, "0");
+        ptrSparePartInputScreen->setSparePart(day, month, "0");
+        sparePartName = ptrSparePartInputScreen->getSparePartName();
+        sparePartPrice = ptrSparePartInputScreen->getSparePartPrice();
+        ShipOrder* ptr = new ShipOrder(1, day, month, sparePartName, sparePartPrice);
+        ptrShipOrderList->insert(ptr);
 
         bool err = false;
         do

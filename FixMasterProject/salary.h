@@ -4,7 +4,7 @@
 #include <iostream>
 #include <list>
 
-#include <master.h>
+#include "master.h"
 
 using namespace std;
 
