@@ -20,7 +20,7 @@ private:
     int totalSalaries;
     int totalSparePartsIn, totalSparePartsOut;
     int totalServices;
-    int salaries, expenses;
+    int salaries;
 
 public:
     AnnualReport(SalaryRecord*, SparePartList*, ServiceList*);
